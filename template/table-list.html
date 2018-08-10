@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="home">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <script src="assets/js/echarts.min.js"></script>
+    <link rel="stylesheet" href="assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="assets/css/amazeui.datatables.min.css" />
+    <link rel="stylesheet" href="assets/css/app.css">
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/vue.min.js"></script>
+</head>
+
+<body data-type="home" class="theme-black">
+    <script src="assets/js/theme.js"></script>
+    <div class="am-g tpl-g">
+        <!-- 头部 -->
+        <header>
+            <div class="am-fl">
+                <span style="color: #ffffff;font-size: 25px;margin: 30px;" class="am-kai">IT 管家系统</span>
+            </div>
+            <!-- 右侧内容 -->
+            <div class="tpl-header-fluid">
+                <!-- 侧边切换 -->
+                <div class="am-fl tpl-header-switch-button am-icon-list">
+                    <span>
+                    </span>
+                </div>
+                <!-- 搜索 -->
+                <div class="am-fl tpl-header-search">
+                    <form class="tpl-header-search-form" action="javascript:;">
+                        <button class="tpl-header-search-btn am-icon-search"></button>
+                        <input class="tpl-header-search-box" type="text" placeholder="搜索内容...">
+                    </form>
+                </div>
+                <!-- 其它功能-->
+                <div class="am-fr tpl-header-navbar">
+                    <ul>
+                        <!-- 欢迎语 -->
+                        <li class="am-text-sm tpl-header-navbar-welcome">
+                            <a href="javascript:;">欢迎你,
+                                <span>Guest</span>
+                            </a>
+                        </li>
+
+                        <!-- 退出 -->
+                        <li class="am-text-sm">
+                            <a href="javascript:;">
+                                <span class="am-icon-sign-out"></span> 退出
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <!-- 风格切换 -->
+
+        <div class="tpl-content-wrapper active">
+            <div class="row-content am-cf">
+                <div class="row">
+                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                        <div class="widget am-cf">
+                            <div class="widget-head am-cf">
+                                <div class="widget-title  am-cf">请求列表</div>
+                            </div>
+                            <div class="widget-body  am-fr">
+
+                                <div class="am-u-sm-12 am-u-md-6 am-u-lg-6">
+                                    <div class="am-form-group">
+                                        <div class="am-btn-toolbar">
+                                            <div class="am-btn-group am-btn-group-xs">
+                                                <button type="button" class="am-btn am-btn-default am-btn-success">
+                                                    <span class="am-icon-plus"></span> 新增</button>
+                                                <button type="button" class="am-btn am-btn-default am-btn-secondary">
+                                                    <span class="am-icon-save"></span> 保存</button>
+                                                <button type="button" class="am-btn am-btn-default am-btn-warning">
+                                                    <span class="am-icon-archive"></span> 审核</button>
+                                                <button type="button" class="am-btn am-btn-default am-btn-danger">
+                                                    <span class="am-icon-trash-o"></span> 删除</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="am-u-sm-12 am-u-md-6 am-u-lg-3">
+                                    <div class="am-form-group tpl-table-list-select">
+                                        <select data-am-selected="{btnSize: 'sm'}">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="am-u-sm-12 am-u-md-12 am-u-lg-3">
+                                    <div class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
+                                        <input type="text" class="am-form-field ">
+                                        <span class="am-input-group-btn">
+                                            <button class="am-btn  am-btn-default am-btn-success tpl-table-list-field am-icon-search" type="button"></button>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="am-u-sm-12" id="vue_table_request">
+                                    <vue-table-component :records="sources" :columns="columns" :id="id"></vue-table-component>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+    <script src="assets/js/amazeui.min.js"></script>
+    <script src="assets/js/amazeui.datatables.min.js"></script>
+    <script src="assets/js/dataTables.responsive.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/component/table.js"></script>
+
+    <script type="text/javascript">
+        if (window.it_orders == undefined ){
+            window.it_orders = {
+                opttypes: ['开通', '变更', '退订', '暂停', '恢复', '试用转商用', '预开通', '再次开通'],
+                codes: {
+                    111800100194: '基础版30点',
+                    111800100195: '基础版60点',
+                    111800100196: '基础版100点',
+                    111800100197: '增强版30点',
+                    111800100198: '增强版30点',
+                    111800100199: '增强版30点'
+                },
+                columns: [
+                    ["订单编码", "ecordercode"],
+                    ["订单套餐", "code"],
+                    ["业务状态", "opttype"], // 
+                    ["是否试用", "" ],
+                    ["生效时间", "begintime"],
+                    ["失效时间", "endtime"],
+                    ["变更受理时间", "operatime"],
+                    ["变更生效时间", "effecttime"],
+                    ["企业名称", "custname"],
+                    ["联系人", "useralias"],
+                    ["手机号", "mobile"],
+                    ["邮箱", "email"],
+                    ["用户地域", ""],
+                    ["是否实施", ""],
+                    ["登录URL", "loginurl"],
+                    ["登录名", "username"],
+                    ["登录密码", "password"]
+                ],
+                ordervm: null,
+                sources: null
+            }
+        }
+
+        var orders = window.it_orders
+
+        function itdateformat(timestamp){
+            if(timestamp > 0){
+                var b = new Date(timestamp)
+                return b.getFullYear()+"-"+(b.getMonth()+1)+"-"+b.getDate()
+            } else {
+                return ""
+            }
+        }
+
+        $.ajax({
+            url: "/query/order",
+            async: false,
+            success: function(response){
+                var keys = response.keys
+                var values = response.values
+                var sources = []
+
+
+
+                values.forEach(function(value){
+                    var code = value[7].length > 0? orders.codes[value[7][0].code]: ""
+                    var begintime = itdateformat(value[8])
+                    var endtime = itdateformat(value[9])
+                    var operatime = itdateformat(value[10])
+                    var effettime = itdateformat(value[11])
+
+                    var source = [
+                        value[0], 
+                        value[7][0]['code'],
+                        value[2],
+                        value[3],
+                        begintime,
+                        endtime,
+                        operatime,
+                        effettime,
+                        value[16],
+                        value[18],
+                        value[20],
+                        value[21],
+                        "", // 用户地域
+                        "", // 是否实施
+                        "", // 登录URL
+                        "", // 登录名
+                        "" //登录密码
+                    ]
+
+                    sources.push(source)
+                })
+  
+                orders.sources = sources
+            }
+        })
+
+        orders.ordervm = new Vue({
+            el: "#vue_table_request",
+            data:{
+                id:"data-source-table",
+                sources: orders.sources,
+                columns: orders.columns
+            },
+            methods: {}
+        })
+    </script>
+
+</body>
+
+</html>

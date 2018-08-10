@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="home">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <script src="assets/js/echarts.min.js"></script>
+    <link rel="stylesheet" href="assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="assets/css/amazeui.datatables.min.css" />
+    <link rel="stylesheet" href="assets/css/app.css">
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/ai.js"></script>
+    <script src="assets/js/dark.js"></script>
+</head>
+
+<body data-type="home" class="theme-black">
+    <script src="assets/js/theme.js"></script>
+    <div class="am-g tpl-g">
+        <!-- 头部 -->
+        <header>
+            <div class="am-fl">
+                <span style="color: #e0e8ecd4;font-size: 35px;margin: 30px;">AI Station</span>
+            </div>
+            <!-- 右侧内容 -->
+            <div class="tpl-header-fluid">
+                <!-- 侧边切换 -->
+                <div class="am-fl tpl-header-switch-button am-icon-list">
+                    <span>
+                    </span>
+                </div>
+                <!-- 搜索 -->
+                <div class="am-fl tpl-header-search">
+                    <form class="tpl-header-search-form" action="javascript:;">
+                        <button class="tpl-header-search-btn am-icon-search"></button>
+                        <input id='ai-command-content' class="tpl-header-search-box" type="text" placeholder="输入指令...">
+                    </form>
+                </div>
+                <!-- 其它功能-->
+                <div class="am-fr tpl-header-navbar">
+                    <ul>
+                        <!-- 欢迎语 -->
+                        <li class="am-text-sm tpl-header-navbar-welcome">
+                            <a href="javascript:;">欢迎你,
+                                <span>Guest</span>
+                            </a>
+                        </li>
+
+                        <!-- 退出 -->
+                        <li class="am-text-sm">
+                            <a href="javascript:;">
+                                <span class="am-icon-sign-out"></span> 退出
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <!-- 风格切换 -->
+        <!-- 侧边导航栏 -->
+        <!--
+        <div class="left-sidebar active">
+            <ul class="sidebar-nav">
+                <li class="sidebar-nav-link">
+                    <a href="index.html" class="active">
+                        <i class="am-icon-home sidebar-nav-link-logo"></i> 首页
+                    </a>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a href="#">
+                        <i class="am-icon-table sidebar-nav-link-logo"></i> 统计分析
+                    </a>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a href="#">
+                        <i class="am-icon-calendar sidebar-nav-link-logo"></i> 配置管理
+                    </a>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a href="#">
+                        <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 权限
+
+                    </a>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a href="#">
+                        <i class="am-icon-bar-chart sidebar-nav-link-logo"></i> 个人信息
+
+                    </a>
+                </li>
+            </ul>
+        </div>
+        -->
+        <!-- 内容区域 -->
+
+        <div class="tpl-content-wrapper active">
+            <div class="row-content am-cf">
+                <div class="widget am-cf">
+                    <div class="widget-head am-cf">
+                        <div class="am-u-sm-12 am-u-md-6 am-u-lg-6">
+                            <div class="am-form-group">
+                                <div class="am-btn-toolbar">
+                                    <div class="am-btn-group am-btn-group-xs">
+                                        <button type="button" class="am-btn am-btn-default am-btn-success" onclick="AI.startTrain()">
+                                            <span class="am-icon-plus"></span> 训练</button>
+                                        <button type="button" class="am-btn am-btn-default am-btn-secondary">
+                                            <span class="am-icon-save"></span> 保存</button>
+                                        <button type="button" class="am-btn am-btn-default am-btn-warning" onclick="AI.stopTrain()">
+                                            <span class="am-icon-archive"></span> 终止</button>
+                                        <button type="button" class="am-btn am-btn-default am-btn-danger" onclick="AI.preview()">
+                                            <span class="am-icon-trash-o"></span> 预览</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="widget-function am-fr">
+                            <a href="javascript:;" class="am-icon-cog"></a>
+                        </div>
+                    </div>
+                    <div class="widget-body am-fr">
+                        <div style="height: 700px;" id="mock-main" id="tpl-echarts-A">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+    <script src="assets/js/amazeui.min.js"></script>
+    <script src="assets/js/amazeui.datatables.min.js"></script>
+    <script src="assets/js/dataTables.responsive.min.js"></script>
+    <script src="assets/js/app.js"></script>
+
+    <script type="text/javascript">
+        window.onload = function () {
+            var myChart = echarts.init(document.getElementById('mock-main'), 'dark');
+            AI.chart = myChart
+            AI.preview()
+
+            $("#ai-command-content").keydown(function(event){
+                if(event.keyCode==13){
+                    AI.parseCMD($("#ai-command-content").val())
+                }
+            })
+        }
+    </script>
+
+</body>
+
+</html>
